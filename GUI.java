@@ -10,6 +10,8 @@ public class GUI implements ActionListener {
 
     private ImageIcon image;
 
+    private JLabel label2;
+
     private int count = 1;
 
     public GUI() {
@@ -21,10 +23,13 @@ public class GUI implements ActionListener {
 
         
 
-        image = new ImageIcon(getClass().getResource("characters/image" + Integer.toString(count) + ".jpg"));
+        image = new ImageIcon(getClass().getResource("character/image" + Integer.toString(count) + ".jpg"));
         label = new JLabel(image);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.TOP);
+
+        label2 = new JLabel();
+        //label2.setText("" + count);
 
         panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
@@ -34,6 +39,7 @@ public class GUI implements ActionListener {
         panel.add(label);
         panel.add(button);
 
+        panel.add(label2);
         
         frame.add(panel);
         
@@ -44,9 +50,17 @@ public class GUI implements ActionListener {
         frame.setVisible(true);
     }
 
+    public static void main(String[] args) {
+        new GUI();
+    }
+    
     public void actionPerformed(ActionEvent e) {
-        count++;
-        image = new ImageIcon(getClass().getResource("characters/image" + Integer.toString(count) + ".jpg"));
-        label.setIcon(image);
+        if(count <= 37) {
+            count++;
+            image = new ImageIcon(getClass().getResource("character/image" + Integer.toString(count) + ".jpg"));
+            label.setIcon(image);
+            //label2.setText("" + count);
+        }
+        
     }
 }
