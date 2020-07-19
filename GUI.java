@@ -5,6 +5,9 @@ import java.awt.event.*;
 
 public class GUI implements ActionListener {
     private JFrame frame;
+    private JButton addButton;
+    private JButton subtractButton;
+
     private JLabel label;
     private JPanel panel;
 
@@ -17,11 +20,13 @@ public class GUI implements ActionListener {
     public GUI() {
         frame = new JFrame();
 
-        JButton button = new JButton("Next");
-        button.addActionListener(this);
-        button.setVerticalAlignment(JButton.BOTTOM);
+        addButton = new JButton("Next");
+        addButton.addActionListener(this);
+        addButton.setVerticalAlignment(JButton.BOTTOM);
 
-        
+        subtractButton = new JButton("Previous");
+        subtractButton.addActionListener(this);
+        subtractButton.setVerticalAlignment(JButton.BOTTOM);
 
         image = new ImageIcon(getClass().getResource("character/image" + Integer.toString(count) + ".jpg"));
         label = new JLabel(image);
@@ -37,7 +42,9 @@ public class GUI implements ActionListener {
         
         
         panel.add(label);
-        panel.add(button);
+        panel.add(addButton);
+        panel.add(subtractButton);
+        
 
         panel.add(label2);
         
@@ -55,12 +62,35 @@ public class GUI implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e) {
-        if(count <= 37) {
+        if(e.getSource() == addButton) {
             count++;
             image = new ImageIcon(getClass().getResource("character/image" + Integer.toString(count) + ".jpg"));
             label.setIcon(image);
             //label2.setText("" + count);
+
+            if(count == 37) {
+                addButton.setVisible(false);
+                subtractButton.setVisible(true);
+            }
+            else {
+                addButton.setVisible(true);
+                subtractButton.setVisible(true);
+            }
         }
-        
+        else if (e.getSource() == subtractButton) {
+            count--;
+            image = new ImageIcon(getClass().getResource("character/image" + Integer.toString(count) + ".jpg"));
+            label.setIcon(image);
+            //label2.setText("" + count);
+
+            if(count == 1) {
+                addButton.setVisible(true);
+                subtractButton.setVisible(false);
+            }
+            else {
+                addButton.setVisible(true);
+                subtractButton.setVisible(true);
+            }
+        }
     }
 }
